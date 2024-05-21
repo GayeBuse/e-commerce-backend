@@ -36,7 +36,7 @@ public class CardServiceImpl implements CardService {
             cardRepository.delete(card);
             return card;
         } else {
-            return null; // hata mesajı gelecek
+            return null; // hata mesajı gelecekk
         }
     }
 }
