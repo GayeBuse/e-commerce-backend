@@ -3,9 +3,10 @@ package com.workintech.ecommercebackend.service;
 import com.workintech.ecommercebackend.entity.Card;
 import com.workintech.ecommercebackend.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CardServiceImpl implements CardService {
     private CardRepository cardRepository;
 
