@@ -33,11 +33,16 @@ public class User implements UserDetails {
     @Size(min = 8,max = 100,message = "Password must not be less than 8 and greater than 100 characters.")
     @Column(name = "password")
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER) // Roller, kullanıcı sorgulandığında hemen getirilir. Bu, rollerin veri tabanından hemen yüklenmesini sağlar.
     @JoinTable(name = "user_role", schema = "ecommerce",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> authorities = new ArrayList<>(); // Bu, kullanıcının rollerinin saklanacağı bir liste tanımlar.
+    @ManyToMany (cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name = "address_user",schema = "e-commerce",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private List<Address> addresses;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities; //Bu liste, Spring Security'nin kullanıcının yetkilerini anlaması için gereklidir.
@@ -67,4 +72,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+
+
 }
