@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 //UserDetailsServicee sınıfı,
 // Spring Security'nin bir parçasıdır
 // ve kullanıcı kimlik doğrulama
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 // yapılamaz. Kimlik doğrulama işlemleri,
 // kullanıcı bilgilerini yükleyemez ve
 // güvenlik kontrolleri çalışmaz.
+@Service
 public class UserDetailsServicee implements UserDetailsService {
     private UserRepository userRepository;
 @Autowired
@@ -30,7 +33,7 @@ public class UserDetailsServicee implements UserDetailsService {
         return userRepository.findUserByEmail(email) //Kullanıcıyı e-posta adresine göre bulmaya çalışır.
                 .orElseThrow(()->{ //// Eğer kullanıcı bulunamazsa
                     System.out.println("user are not valid");
-                   return null; // hata yaz
+                    throw new UsernameNotFoundException("user are not valid");
                 });
     }
 }

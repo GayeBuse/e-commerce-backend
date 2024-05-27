@@ -1,8 +1,10 @@
 package com.workintech.ecommercebackend.service;
 
 import com.workintech.ecommercebackend.entity.User;
+import com.workintech.ecommercebackend.exceptions.GlobalExceptions;
 import com.workintech.ecommercebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +21,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        Optional<User> optionalUser=userRepository.findById(id);
-        if (optionalUser.isPresent()){
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
             return optionalUser.get();
-        } return null;//hata
-    }
 
+        }
+        throw new GlobalExceptions("User is not found with this id: " + id, HttpStatus.NOT_FOUND);
+    }
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         Optional<User> existingUser = userRepository.findUserByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return null; // hata yaz
+            throw new GlobalExceptions("This email is already in use", HttpStatus.CONFLICT);
 
         }
         return userRepository.save(user);
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(Long id, User updatedUser) {
-        return null;
+        throw new GlobalExceptions("User is not found with this id: " + id, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -53,6 +56,6 @@ public class UserServiceImpl implements UserService {
             userRepository.delete(user);
             return user;
         }
-        return null; // hata
+        throw new GlobalExceptions("User is not found with this id: " + id, HttpStatus.NOT_FOUND);
     }
 }
