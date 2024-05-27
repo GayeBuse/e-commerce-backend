@@ -1,8 +1,10 @@
 package com.workintech.ecommercebackend.service;
 
 import com.workintech.ecommercebackend.entity.Card;
+import com.workintech.ecommercebackend.exceptions.GlobalExceptions;
 import com.workintech.ecommercebackend.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class CardServiceImpl implements CardService {
             cardRepository.delete(card);
             return card;
         } else {
-            return null; // hata mesajı gelecekk
+            throw new GlobalExceptions("Card by given id cannot be found: "+id, HttpStatus.NOT_FOUND);
         }
     }
 }
