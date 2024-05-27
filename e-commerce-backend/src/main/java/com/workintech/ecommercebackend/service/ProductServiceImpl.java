@@ -1,8 +1,10 @@
 package com.workintech.ecommercebackend.service;
 
 import com.workintech.ecommercebackend.entity.Product;
+import com.workintech.ecommercebackend.exceptions.GlobalExceptions;
 import com.workintech.ecommercebackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> optionalProduct=productRepository.findById(id);
         if (optionalProduct.isPresent()){
             return optionalProduct.get();
-        }return null;//hata
+        } throw new GlobalExceptions("Product is not found with this id: " + id, HttpStatus.NOT_FOUND);
     }
 
     @Override
