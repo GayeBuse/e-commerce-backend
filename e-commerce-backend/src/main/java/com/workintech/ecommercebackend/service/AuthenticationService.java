@@ -78,4 +78,6 @@ private PasswordEncoder passwordEncoder;
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
     }
+
+
 }
