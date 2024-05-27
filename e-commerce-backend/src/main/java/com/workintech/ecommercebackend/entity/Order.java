@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,5 +41,15 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> productList;
+
+    public void addProduct(Product product){
+        if (productList==null){
+            productList=new ArrayList<>();
+        }
+        productList.add(product);
+    }
     //Bir siparişin birden fazla ürün içerebileceğini belirtir. Bu ilişki "product_order" adlı ilişki tablosu üzerinden gerçekleştirilir.
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -41,9 +41,9 @@ public class Product {
     @Column(name = "rating")
     private Double rating;
     @Column(name = "sell_count")
-    private int sellCount;
+    private Integer sellCount;
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
     @Column(name = "image")
     private String image;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
