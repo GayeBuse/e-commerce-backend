@@ -1,8 +1,10 @@
 package com.workintech.ecommercebackend.service;
 
 import com.workintech.ecommercebackend.entity.Category;
+import com.workintech.ecommercebackend.exceptions.GlobalExceptions;
 import com.workintech.ecommercebackend.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> optionalCategory= categoryRepository.findById(id);
         if (optionalCategory.isPresent()){
             return optionalCategory.get();
-        } return null; //hata yazılacak
+        } throw new GlobalExceptions("No category found with this id: " + id, HttpStatus.NOT_FOUND);
     }
 
 
