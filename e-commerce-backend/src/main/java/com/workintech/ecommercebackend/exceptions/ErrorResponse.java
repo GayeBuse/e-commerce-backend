@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 // yapılandırılmış hata mesajları göndermek için önemlidir.
 // Bu mesajlar, hata türünü, açıklamasını ve gerektiğinde hatanın
 // nerede olduğunu belirtebilir.
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
