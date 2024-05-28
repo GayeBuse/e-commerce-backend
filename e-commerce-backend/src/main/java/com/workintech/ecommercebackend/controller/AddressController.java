@@ -48,7 +48,7 @@ public class AddressController {
     // kaynak oluşturmak için kullanılır. Genellikle, POST isteği ile sunucuya veri
     // gönderilir ve bu veri sunucu tarafında işlenir. Örneğin, bir kullanıcı bir formu
     // doldurduktan sonra bu bilgileri bir sunucuya POST isteğiyle gönderebilir.
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}") //bir kullanıcının yalnızca kendi hesabına ait adreslere erişimi ve bunları düzenleme yetkisi olur.
     public AddressResponse save(@Validated @PathVariable long userId, @RequestBody Address address) {
         // Kullanıcı ID'sini ve adres bilgilerini içeren bir POST isteği alır. @PostMapping, bu metodu bir HTTP POST isteğine eşler.
         // {userId} ile belirtilen kullanıcı ID'si, @PathVariable kullanılarak URL'den alınır.

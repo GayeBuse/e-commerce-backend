@@ -35,10 +35,12 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER) // Roller, kullanıcı sorgulandığında hemen getirilir. Bu, rollerin veri tabanından hemen yüklenmesini sağlar.
-    @JoinTable(name = "user_role", schema = "ecommerce",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_role", schema = "e-commerce",
+            joinColumns = @JoinColumn(name = "user_id"), //birbirlerinin primery keylerine denk gelen nameler
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> authorities = new ArrayList<>(); // Bu, kullanıcının rollerinin saklanacağı bir liste tanımlar.
+
+
     @ManyToMany (cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name = "address_user",schema = "e-commerce",joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
@@ -50,27 +52,27 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 

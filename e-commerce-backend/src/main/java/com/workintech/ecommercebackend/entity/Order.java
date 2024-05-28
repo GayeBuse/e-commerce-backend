@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "order",schema = "ecommerce")
+@Table(name = "order",schema = "e-commerce")
 public class Order {
 
     @Id
@@ -37,7 +37,7 @@ public class Order {
 // Birçok Order bir Card ile ilişkilidir. Bu, bir kartın birden fazla sipariş için kullanılabileceği anlamına gelir
 
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH})
-    @JoinTable(name = "product_order",schema = "ecommerce",
+    @JoinTable(name = "product_order",schema = "e-commerce",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> productList;

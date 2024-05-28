@@ -29,7 +29,9 @@ public class UserDetailsServicee implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {//Bu metot, verilen bir kullanıcı adına göre bir UserDetails nesnesi yükler.
+       // Kullanıcı bulunamazsa, UsernameNotFoundException fırlatılabilir.
+              //  UserDetails nesnesi, kullanıcı hakkındaki bilgileri içerir. Bu bilgiler genellikle kullanıcı adı, şifre ve roller gibi temel bilgileri içerir.
         return userRepository.findUserByEmail(email) //Kullanıcıyı e-posta adresine göre bulmaya çalışır.
                 .orElseThrow(()->{ //// Eğer kullanıcı bulunamazsa
                     System.out.println("user are not valid");

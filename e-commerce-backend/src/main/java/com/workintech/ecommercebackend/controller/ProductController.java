@@ -81,6 +81,11 @@ public class ProductController {
                 ,product.getSellCount() ,product.getStock(),product.getImage());
 
     }
+//güncellenmek istenen ürünün bulunması için kullanılan indexOf işlemi,
+// listedeki bir öğenin konumunu belirleyerek güncelleme işlemini hızlandırmaya yardımcı olur.
 
+//Özellikle, listede bulunan bir öğenin endeksini bilerek, bu öğeyi güncellemenin ve yerine yeni bir öğe
+// yerleştirmenin daha verimli olduğu durumlar için indexOf kullanılır. Bu, özellikle listenin büyüklüğü arttıkça
+// performans avantajı sağlar
     }
 

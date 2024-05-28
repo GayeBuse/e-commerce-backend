@@ -27,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "product",schema = "e-commerce")
+@Table(name = "product", schema = "e-commerce")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +51,7 @@ public class Product {
     //(Ürün) varlığının birçok örneğinin bir Category (Kategori) varlığına ait olduğunu belirtir
     private Category category;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_order",schema = "ecommerce",
+    @JoinTable(name = "product_order",schema = "e-commerce",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Order> orders;

@@ -39,7 +39,7 @@ private PasswordEncoder passwordEncoder;
         if (existingUser.isPresent()) {
             return null; //mevcut kullanıcı konntrolü
         }
-        String encodedPassword = passwordEncoder.encode(password); //güvenlik amacıyla
+        String encodedPassword = passwordEncoder.encode(password); //güvenlik amacıyla şifre şifrelenir
 
         Role role = new Role();
         role.setAuthority("USER");

@@ -1,5 +1,6 @@
 package com.workintech.ecommercebackend.controller;
 
+import com.workintech.ecommercebackend.dto.OrderRequest;
 import com.workintech.ecommercebackend.dto.OrderResponse;
 import com.workintech.ecommercebackend.entity.Address;
 import com.workintech.ecommercebackend.entity.Order;
@@ -42,20 +43,22 @@ public class OrderController {
         }
     }
     @PostMapping("/{addressId}")
-    public OrderResponse save(@PathVariable Long addressId, @RequestBody Order order) {
+    public OrderResponse save(@PathVariable Long addressId, @RequestBody OrderRequest orderRequest) {
         Address address = addressService.findById(addressId);
         if (address != null) {
-            address.getOrderList().add(order);// Adresin sipariş listesine yeni siparişi ekleriz.
+            Order order = new Order();
+            order.setProductList(orderRequest.getProductList());
+            order.setUser(orderRequest.getUser());
+
+            address.getOrderList().add(order);
             order.setAddress(address);
-            List<Product> productList = order.getProductList();
-            for (Product product : productList) {
-                order.addProduct(product);
-            }
+
             orderService.save(order);
+
+            return new OrderResponse(order.getId(), order.getProductList(), order.getUser(), order.getAddress());
         } else {
-            throw new GlobalExceptions("Order is not found with this id: " + addressId, HttpStatus.NOT_FOUND);
+            throw new GlobalExceptions("Address is not found with this id: " + addressId, HttpStatus.NOT_FOUND);
         }
-        return new OrderResponse(order.getId(), order.getProductList(), order.getUser(), order.getAddress());
     }
     @PutMapping("/{addressId}")
     public OrderResponse update(@RequestBody Order order, @PathVariable long addressId){

@@ -8,9 +8,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class OrderRequest {
-        private List<Product> productList;
-        private Order order;
-        private User user;
-    }
+public  class OrderRequest {
+    private List<Product> productList; // Siparişe dahil edilecek ürünlerin listesi
+    private Order order; // Sipariş bilgileri
+    private User user; // Siparişi veren kullanıcı
+}
 
