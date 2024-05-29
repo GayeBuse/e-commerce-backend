@@ -56,7 +56,7 @@ public class AddressController {
         User user = userService.findById(userId);
         // Belirtilen userId ile bir kullanıcıyı arar.
         if (user != null) {
-            address.setUser((List<User>) user);
+            address.setUser(user);
             // Adresin user alanına, bulunan kullanıcı atanır. Bu, adresin hangi kullanıcıya ait olduğunu belirler.
             addressService.save(address);
             // Adres bilgileri veritabanına kaydedilir.

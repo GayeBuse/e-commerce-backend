@@ -35,10 +35,9 @@ public class Address {
     private String title;
 
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name = "address_user",schema = "e-commerce",joinColumns = @JoinColumn(name = "address_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "address")
     private List<Order> orderList;

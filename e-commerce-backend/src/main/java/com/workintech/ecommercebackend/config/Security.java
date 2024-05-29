@@ -76,6 +76,7 @@ public class Security {
                     auth.requestMatchers("/product/**").permitAll(); // endpointlerine herkese açık erişim izni veriyoruz
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/category/**").permitAll();
+                    auth.requestMatchers("/user/**").permitAll();
                     auth.requestMatchers("/order/**").permitAll();
                     auth.requestMatchers("/card/**").hasAnyAuthority("Admin", "User");//(permitAll()). /card/** endpointlerine ise yalnızca "Admin" veya "User" yetkisine sahip kullanıcıların erişmesine izin veriyoruz (hasAnyAuthority("Admin", "User"))
                     auth.requestMatchers("/address/**").permitAll();
